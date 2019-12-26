@@ -1,0 +1,42 @@
+@mixin clearfix {
+    &::after {
+        content:"";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+//MEDIA QUERY MANAGER
+
+/*
+0 - 600 :       phone                   -phone
+600 - 900 :     tablet portrait         -tab-port
+900 - 1200 :    tablet landscape        -tab-land
+[1200 - 1800] : normal style            XXXXXXXXX
+1800+ :         big desktop             -big
+
+1em = 16px
+*/
+
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and (max-width: 37.5em) {@content}; //600
+    }
+    @if $breakpoint == tab-port {
+        @media only screen and (max-width: 56.25em) {@content}; //900
+    }
+    @if $breakpoint == tab-land {
+        @media only screen and (max-width: 75em) {@content}; //1200
+    }
+    @if $breakpoint == big-desktop {
+        @media only screen and (max-width: 112.5em) {@content}; //1800
+    }
+}
